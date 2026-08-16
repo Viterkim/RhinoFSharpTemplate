@@ -1,0 +1,15 @@
+These scripts can create or publish real Yak packages.
+
+They refuse to run from this folder on purpose.
+
+When the manifest, README, license, package name, version, and command GUIDs are ready for release, move these three files one layer up into scripts\win:
+
+    yak.ps1
+    build-all-prod.ps1
+    build-all-prod-push.ps1
+
+Then build packages without publishing:
+
+    .\scripts\win\yak.ps1 -RhinoVersion 8
+
+Publishing remains explicit through -Publish Test, -Publish Production, or build-all-prod-push.ps1.

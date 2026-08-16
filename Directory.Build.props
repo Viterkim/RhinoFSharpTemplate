@@ -1,0 +1,28 @@
+<Project>
+  <PropertyGroup>
+    <RhinoFSharpTemplatePlatform Condition="'$(RhinoFSharpTemplatePlatform)' == ''">win</RhinoFSharpTemplatePlatform>
+    <RhinoDefaultVersion>8</RhinoDefaultVersion>
+    <RhinoSupportedVersions>7;8;9</RhinoSupportedVersions>
+    <RhinoExperimentalVersions></RhinoExperimentalVersions>
+    <RhinoBuildVersions>$(RhinoSupportedVersions);$(RhinoExperimentalVersions)</RhinoBuildVersions>
+    <RhinoReleaseVersions>$(RhinoSupportedVersions)</RhinoReleaseVersions>
+    <RhinoMajorVersion Condition="'$(RhinoMajorVersion)' == ''">$(RhinoDefaultVersion)</RhinoMajorVersion>
+    <BaseOutputPath>bin\rh$(RhinoMajorVersion)\</BaseOutputPath>
+    <BaseIntermediateOutputPath>obj\rh$(RhinoMajorVersion)\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RhinoMajorVersion)' == '7'">
+    <TargetFramework Condition="'$(TargetFramework)' == ''">net48</TargetFramework>
+    <RhinoCommonPackageVersion Condition="'$(RhinoCommonPackageVersion)' == ''">7.38.24338.17001</RhinoCommonPackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RhinoMajorVersion)' == '8'">
+    <TargetFramework Condition="'$(TargetFramework)' == ''">net8.0-windows</TargetFramework>
+    <RhinoCommonPackageVersion Condition="'$(RhinoCommonPackageVersion)' == ''">8.34.26223.11001</RhinoCommonPackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RhinoMajorVersion)' == '9'">
+    <TargetFramework Condition="'$(TargetFramework)' == ''">net10.0-windows</TargetFramework>
+    <RhinoCommonPackageVersion Condition="'$(RhinoCommonPackageVersion)' == ''">9.0.26230.12303-beta</RhinoCommonPackageVersion>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,16 @@
+name: RhinoFSharpTemplate
+version: 0.0.1
+authors:
+    - TemplateUser
+
+description: >
+    A small F# RhinoCommon plug-in ready to turn into something useful.
+
+url: "https://github.com/TemplateUser/RhinoFSharpTemplate"
+
+keywords:
+    - Rhino
+    - RhinoCommon
+    - plugin
+    - fsharp
+    - source
