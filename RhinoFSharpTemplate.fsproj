@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetExt>.rhp</TargetExt>
+    <AssemblyName>RhinoFSharpTemplate</AssemblyName>
+    <RootNamespace>RhinoFSharpTemplate</RootNamespace>
+    <RunSourceChecks Condition="'$(RunSourceChecks)' == ''">true</RunSourceChecks>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableWindowsTargeting Condition="'$(RhinoFSharpTemplatePlatform)' == 'win'">true</EnableWindowsTargeting>
+    <UseWindowsForms Condition="'$(RhinoFSharpTemplatePlatform)' == 'win'">true</UseWindowsForms>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/TemplateUser/RhinoFSharpTemplate</RepositoryUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="RhinoCommon" Version="$(RhinoCommonPackageVersion)" PrivateAssets="all" ExcludeAssets="runtime" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net48" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+  <Target Name="CheckSource" BeforeTargets="CoreCompile" Condition="'$(RunSourceChecks)' == 'true'">
+    <Exec Command="dotnet fsi &quot;$(MSBuildProjectDirectory)/tools/check-all.fsx&quot; -- &quot;$(MSBuildProjectDirectory)/src&quot;" IgnoreExitCode="true">
+      <Output TaskParameter="ExitCode" PropertyName="SourceCheckExitCode" />
+    </Exec>
+    <Error Condition="'$(SourceCheckExitCode)' != '0'" Code="RFS0001" Text="F# source checks failed." />
+  </Target>
+  <ItemGroup>
+    <Compile Include="src/AssemblyInfo.fs" />
+    <Compile Include="src/Platform/Win/WindowsPlatform.fs" Condition="'$(RhinoFSharpTemplatePlatform)' == 'win'" />
+    <Compile Include="src/Plugin/Plugin.fs" />
+    <Compile Include="src/Commands/RhinoFSharpTemplateA.fs" />
+    <Compile Include="src/Commands/RhinoFSharpTemplateB.fs" />
+    <Compile Include="src/Commands/Commands.fs" />
+  </ItemGroup>
+</Project>
